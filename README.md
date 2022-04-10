@@ -3,7 +3,7 @@
 Pytorch Implementation for "Pareto-aware Neural Architecture Generation for Diverse Computational Budgets".
 
 <p align="center">
-<img src="assets/overview.png" alt="PNAG" width="90%" align=center />
+<img src="overview.png" alt="PNAG" width="75%" align=center />
 </p>
 
 ## Requirements
