@@ -1,8 +1,5 @@
 # Pareto-aware Neural Architecture Generation for Diverse Computational Budgets
 
-![](https://img.shields.io/badge/-Neural%20Archtiecture%20Generation-blue.svg)
-![](https://img.shields.io/badge/-Pareto%20Frontier%20Learning-blue.svg)
-![](https://img.shields.io/badge/-ArchitectureDesign%20under%20Budgets-blue.svg?logo=tag)
 ![](https://img.shields.io/badge/-PyTorch%20Implementation-blue.svg?logo=pytorch)
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -54,7 +51,14 @@ Comparisons of the architectures obtained by different methods on mobile, CPU an
 
 Please install all the requirements in `requirements.txt`.
 
+## Datasets
+
+We consider a large-scale benchmark classification datsets, namely ImageNet.
+
+ImageNet needs to be manually downloaded and preprocessed (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
+
 ## Training Method
 
 TODO
 
+## Validation of PNAG models
