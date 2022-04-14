@@ -55,10 +55,26 @@ Please install all the requirements in `requirements.txt`.
 
 We consider a large-scale benchmark classification datsets, namely ImageNet.
 
-ImageNet needs to be manually downloaded and preprocessed (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
+ImageNet needs to be manually downloaded (preferably to a SSD) and preprocessed following the [instructions](https://github.com/pytorch/examples/tree/master/imagenet).
 
 ## Training Method
 
-TODO
+We have collect the validation accuracy, the latency on CPU (Intel i5-7400), GPU (NVIDIA TITAN X) and mobile phone (equipped with a Qualcomm Snapdragon 821 processor) of 16,000 architectures in the file (`data/architectures.json`).
+The following scripts will search architectures with the collected data.
 
-## Validation of PNAG models
+Script to search on CPU platform.
+```
+bash search_on_cpu.sh /path/to/imagenet
+```
+
+Script to search on GPU platform.
+```
+bash search_on_gpu.sh /path/to/imagenet
+```
+
+Script to search on mobile platform.
+```
+bash search_on_mobile.sh /path/to/imagenet
+```
+
+## Validating Method
