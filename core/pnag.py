@@ -1,4 +1,5 @@
-from core.model.ofa_mbv3 import OFAMobileNetV3
+from core.third_party.ofa import OFAMobileNetV3
+from core.third_party.ofa.representation import OFAArchitecture
 from core.controller import str2arch, arch2str, Arch
 
 try:
@@ -50,18 +51,20 @@ archs_weights_urls = {
 
 
 def _get_pnag_from_supernet(name):
-    net = OFAMobileNetV3(
-        dropout_rate=0,
+    ofa_supernet = OFAMobileNetV3(
+        dropout_rate=0.1,
         width_mult_list=WIDTH,
         ks_list=[3, 5, 7],
         expand_ratio_list=[3, 4, 6],
         depth_list=[2, 3, 4],
     )
-    arch: Arch = str2arch(archs_strings[name])
-    net.set_active_subnet(ks=arch.ks, e=arch.ratios, d=arch.depths)
-    subnet = net.get_active_subnet(preserve_weight=False)
-    state_dict = load_state_dict_from_url(archs_weights_urls[name], progress=True)
+    arch = OFAArchitecture.from_legency_string(archs_strings[name])
+    ofa_supernet.set_active_subnet(ks=arch.ks, e=arch.ratios, d=arch.depths)
+    subnet = ofa_supernet.get_active_subnet(preserve_weight=False)
+
+    state_dict = load_state_dict_from_url(archs_weights_urls[name], progress=True, map_location="cpu")
     subnet.load_state_dict(state_dict)
+    
     return subnet
 
 def pnag_cpu_30():

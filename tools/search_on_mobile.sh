@@ -1,1 +1,0 @@
-python train.py --platform mobile --condition_latencies 80,110,140,170,200 -o output/search_on_mobile --imagenet_path $1

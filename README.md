@@ -64,17 +64,59 @@ The following scripts will search architectures with the collected data.
 
 Script to search on CPU platform.
 ```
-bash search_on_cpu.sh /path/to/imagenet
+bash entry/search_on_cpu.sh /path/to/imagenet
 ```
 
 Script to search on GPU platform.
 ```
-bash search_on_gpu.sh /path/to/imagenet
+bash entry/search_on_gpu.sh /path/to/imagenet
 ```
 
 Script to search on mobile platform.
 ```
-bash search_on_mobile.sh /path/to/imagenet
+bash entry/search_on_mobile.sh /path/to/imagenet
 ```
 
-## Validating Method
+## Evaluation Method
+
+ - Pretrained models
+We have released our PNAG ImageNet pretrained model on [here](https://github.com/guoyongcs/PNAG/releases/tag/weights).
+
+You can use the following codes to load the pretrained models:
+
+```
+import torch
+model = torch.hub.load("github.com/guoyongcs/PNAG", "pnag-cpu-30")
+```
+
+All available model names are
+
+```
+['pnag_cpu_30', 'pnag_cpu_35', 'pnag_cpu_40', 'pnag_cpu_45', 'pnag_cpu_50', 
+'pnag_gpu_90', 'pnag_gpu_115', 'pnag_gpu_140', 'pnag_gpu_165', 'pnag_gpu_190', 
+'pnag_mobile_80', 'pnag_mobile_110', 'pnag_mobile_140', 'pnag_mobile_170', 'pnag_mobile_200',]
+```
+
+ - Evaluating pretrained models on ImageNet
+
+```
+python -m entry.eval /path/to/imagenet
+```
+
+Results:
+```
+pnag_cpu_30, top1_acc=78.26%, top5_acc=94.07%
+pnag_cpu_35, top1_acc=79.39%, top5_acc=94.45%
+pnag_cpu_40, top1_acc=79.72%, top5_acc=94.86%
+pnag_cpu_45, top1_acc=80.26%, top5_acc=95.03%
+pnag_cpu_50, top1_acc=80.47%, top5_acc=95.05%
+pnag_gpu_90, top1_acc=78.24%, top5_acc=93.98%
+pnag_gpu_115, top1_acc=79.32%, top5_acc=94.56%
+pnag_gpu_140, top1_acc=79.70%, top5_acc=94.82%
+pnag_gpu_165, top1_acc=80.18%, top5_acc=94.98%
+pnag_gpu_190, top1_acc=80.46%, top5_acc=95.02%
+pnag_mobile_80, top1_acc=78.31%, top5_acc=93.97%
+pnag_mobile_110, top1_acc=79.39%, top5_acc=94.51%
+pnag_mobile_170, top1_acc=80.35%, top5_acc=95.01%
+pnag_mobile_200, top1_acc=80.43%, top5_acc=95.17%
+```
