@@ -1,0 +1,5 @@
+numpy
+torch>=1.5.0
+torchvision
+dataclasses
+tb-nightly
