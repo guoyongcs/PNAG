@@ -100,7 +100,7 @@ All available model names are
 
  - Evaluating pretrained models on ImageNet
 
-We also provide a script to evaluate the pretrained model on ImageNet and report the accuracy.
+We also provide a script to evaluate the pretrained models on ImageNet and report the accuracy.
 
 ```
 python -m entry.eval /path/to/imagenet
