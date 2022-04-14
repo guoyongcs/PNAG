@@ -80,6 +80,7 @@ bash entry/search_on_mobile.sh /path/to/imagenet
 ## Evaluation Method
 
  - Pretrained models
+ 
 We have released our PNAG ImageNet pretrained model on [here](https://github.com/guoyongcs/PNAG/releases/tag/weights).
 
 You can use the following codes to load the pretrained models:
