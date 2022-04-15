@@ -87,7 +87,7 @@ You can use the following codes to load the pretrained models:
 
 ```
 import torch
-model = torch.hub.load("github.com/guoyongcs/PNAG", "pnag-cpu-30")
+model = torch.hub.load("guoyongcs/PNAG", "pnag-cpu-30")
 ```
 
 All available model names are
