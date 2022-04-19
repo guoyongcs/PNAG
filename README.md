@@ -78,7 +78,7 @@ bash entry/search_on_gpu.sh /path/to/imagenet
 
 
 
- #### Pretrained Models
+ ### Pretrained Models
 
 We have released our PNAG [pretrained model](https://github.com/guoyongcs/PNAG/releases/tag/weights) on ImageNet. 
 
@@ -97,7 +97,7 @@ The names of all the available models are listed below
 'pnag_mobile_80', 'pnag_mobile_110', 'pnag_mobile_140', 'pnag_mobile_170', 'pnag_mobile_200',]
 ```
 
-#### Evaluating Models on ImageNet
+### Evaluating Models on ImageNet
 
 We also provide a script to evaluate the pretrained models on ImageNet and report the accuracy.
 
