@@ -105,6 +105,8 @@ We also provide a script to evaluate the pretrained models on ImageNet and repor
 python -m entry.eval /path/to/imagenet
 ```
 
+> `CN=true python -m entry.eval /path/to/imagenet` for China mainland users to address networking problem
+
 - Results for mobile latency budgets:
 
 | Method           | Latency (ms) | #MAdds (M) | Acc@1 |

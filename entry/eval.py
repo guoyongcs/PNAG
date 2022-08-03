@@ -56,11 +56,11 @@ import torchvision.datasets as datasets
 import core.pnag as pnag
 
 
-model_names = ['pnag_cpu_30', 'pnag_cpu_35', 'pnag_cpu_40', 'pnag_cpu_45', 'pnag_cpu_50', 
-'pnag_gpu_90', 'pnag_gpu_115', 'pnag_gpu_140', 'pnag_gpu_165', 'pnag_gpu_190', 
-'pnag_mobile_80', 'pnag_mobile_110', 
-#'pnag_mobile_140', 
-'pnag_mobile_170', 'pnag_mobile_200',]
+model_names = [
+    'pnag_mobile_80', 'pnag_mobile_110', 'pnag_mobile_140', 'pnag_mobile_170', 'pnag_mobile_200',
+    'pnag_cpu_30', 'pnag_cpu_35', 'pnag_cpu_40', 'pnag_cpu_45', 'pnag_cpu_50',
+    'pnag_gpu_90', 'pnag_gpu_115', 'pnag_gpu_140', 'pnag_gpu_165', 'pnag_gpu_190',
+]
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('data', metavar='DIR', default='imagenet',
@@ -113,6 +113,7 @@ best_acc1 = 0
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+
 def main():
     args = parser.parse_args()
 
@@ -151,6 +152,7 @@ def main():
 def main_worker(gpu, ngpus_per_node, args):
     # global best_acc1
     for model_name in model_names:
+        print(f"start to infer {model_name} on ImageNet val set")
         model = getattr(pnag, model_name)()
         model.to(device=device)
 
@@ -158,7 +160,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
         valdir = os.path.join(args.data, 'val')
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                        std=[0.229, 0.224, 0.225])
+                                         std=[0.229, 0.224, 0.225])
 
         val_loader = torch.utils.data.DataLoader(
             datasets.ImageFolder(valdir, transforms.Compose([
@@ -170,9 +172,8 @@ def main_worker(gpu, ngpus_per_node, args):
             batch_size=args.batch_size, shuffle=False,
             num_workers=args.workers, pin_memory=True)
 
-
         top1_acc, top5_acc = validate(val_loader, model, criterion, args)
-        print(f"{model_name}, top1_acc={top1_acc:.2f}%, top5_acc={top5_acc:.2f}%")
+        print(f"{model_name}, top1_acc={top1_acc:.2f}%, top5_acc={top5_acc:.2f}%\n")
 
 
 def validate(val_loader, model, criterion, args):
@@ -221,14 +222,17 @@ def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
     if is_best:
         shutil.copyfile(filename, 'model_best.pth.tar')
 
+
 class Summary(Enum):
     NONE = 0
     AVERAGE = 1
     SUM = 2
     COUNT = 3
 
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
+
     def __init__(self, name, fmt=':f', summary_type=Summary.AVERAGE):
         self.name = name
         self.fmt = fmt
@@ -250,7 +254,7 @@ class AverageMeter(object):
     def __str__(self):
         fmtstr = '{name} {val' + self.fmt + '} ({avg' + self.fmt + '})'
         return fmtstr.format(**self.__dict__)
-    
+
     def summary(self):
         fmtstr = ''
         if self.summary_type is Summary.NONE:
@@ -263,7 +267,7 @@ class AverageMeter(object):
             fmtstr = '{name} {count:.3f}'
         else:
             raise ValueError('invalid summary type %r' % self.summary_type)
-        
+
         return fmtstr.format(**self.__dict__)
 
 
@@ -277,7 +281,7 @@ class ProgressMeter(object):
         entries = [self.prefix + self.batch_fmtstr.format(batch)]
         entries += [str(meter) for meter in self.meters]
         print('\t'.join(entries))
-        
+
     def display_summary(self):
         entries = [" *"]
         entries += [meter.summary() for meter in self.meters]
@@ -287,6 +291,7 @@ class ProgressMeter(object):
         num_digits = len(str(num_batches // 1))
         fmt = '{:' + str(num_digits) + 'd}'
         return '[' + fmt + '/' + fmt.format(num_batches) + ']'
+
 
 def accuracy(output, target, topk=(1,)):
     """Computes the accuracy over the k top predictions for the specified values of k"""
