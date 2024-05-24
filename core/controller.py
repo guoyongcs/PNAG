@@ -58,17 +58,20 @@ class Controller(nn.Module):
         entropy = m.entropy()
         return action, select_log_p, entropy
 
-    def forward(self, condition=None, uniform=False):
+    def forward(self, condition=None, uniform=False, embed=None):
         log_ps = []
         entrpys = []
-        if condition is None:
-            inputs = self._zeros(self.batch_size)
+        if embed is not None:
+            pass
         else:
-            inputs = self.condition_embedding(condition)
+            if condition is None:
+                inputs = self._zeros(self.batch_size)
+            else:
+                inputs = self.condition_embedding(condition)
+            embed = inputs
 
         hidden = self._zeros(self.batch_size), self._zeros(self.batch_size)
-        embed = inputs
-
+        
         depths = []
         ks = []
         ratios = []
